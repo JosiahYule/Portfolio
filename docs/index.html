@@ -1,37 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-CA">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Josiah Yule. Websites, branding, and social media.</title>
-  <link rel="preload" href="fonts/spacegrotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/dmsans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Josiah Yule, web designer and marketer in Halifax, NS</title>
   <meta name="description" content="Josiah Yule designs and builds websites, brand identities, and social media for small businesses. Based in Halifax, NS.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.josiahyule.ca">
-  <meta property="og:title" content="Josiah Yule. Websites, branding, and social media.">
-  <meta property="og:description" content="Josiah Yule designs and builds websites, brand identities, and social media for small businesses. Based in Halifax, NS.">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Josiah Yule. Websites, branding, and social media.">
-  <meta name="twitter:description" content="Josiah Yule designs and builds websites, brand identities, and social media for small businesses. Based in Halifax, NS.">
+  <link rel="canonical" href="https://www.josiahyule.ca/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/martianmono-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="portfolio.css">
+
   <meta name="color-scheme" content="light dark">
-  <link rel="canonical" href="https://www.josiahyule.ca">
-  <meta name="theme-color" content="#f7f4ef" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F2EEE6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12110F" media="(prefers-color-scheme: dark)">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.josiahyule.ca/">
+  <meta property="og:title" content="Josiah Yule, web designer and marketer in Halifax, NS">
+  <meta property="og:description" content="Josiah Yule designs and builds websites, brand identities, and social media for small businesses. Based in Halifax, NS.">
   <meta property="og:image" content="https://www.josiahyule.ca/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Josiah Yule. Websites, branding, and social media.">
+  <meta property="og:image:alt" content="Josiah Yule. I design websites, then I build them.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Josiah Yule, web designer and marketer in Halifax, NS">
+  <meta name="twitter:description" content="Josiah Yule designs and builds websites, brand identities, and social media for small businesses. Based in Halifax, NS.">
   <meta name="twitter:image" content="https://www.josiahyule.ca/og-image.png">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="portfolio.css">
-  <script>document.documentElement.classList.add('js');</script>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Josiah Yule",
-    "url": "https://www.josiahyule.ca",
+    "url": "https://www.josiahyule.ca/",
+    "image": "https://www.josiahyule.ca/headshot-800.webp",
     "jobTitle": "Web Designer and Marketer",
     "description": "Josiah Yule designs and builds websites, brand identities, and social media for small businesses. Based in Halifax, NS.",
     "address": { "@type": "PostalAddress", "addressLocality": "Halifax", "addressRegion": "NS", "addressCountry": "CA" },
@@ -40,242 +43,313 @@
   </script>
 </head>
 <body>
-  <a href="#about" class="skip-link">Skip to content</a>
+  <a href="#main" class="skip-link">Skip to content</a>
 
-  <nav>
-    <a href="#" class="nav-logo">Josiah Yule</a>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#work">Work</a>
-      <a href="#contact" class="nav-cta">Get in touch</a>
-    </div>
-    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navMobile">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
-  <div class="nav-mobile" id="navMobile" role="dialog" aria-label="Mobile navigation" aria-modal="true" aria-hidden="true">
-    <nav class="nav-mobile-links">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#work">Work</a>
-      <a href="#contact" class="nav-mobile-cta">Get in touch</a>
-    </nav>
-    <div class="nav-mobile-meta">Halifax, NS</div>
-  </div>
-
-  <main id="siteContent">
-  <!-- HERO -->
-  <header class="hero">
-    <h1>Websites, branding, and social media.</h1>
-    <p class="hero-bio">I&rsquo;m a web designer and marketer based in Halifax. For the past couple of years I&rsquo;ve built websites, designed brand identities, and managed social media for small businesses, usually working with owners who want one person handling the design and the build rather than a team.</p>
-    <div class="hero-actions">
-      <a href="#work" class="btn btn-filled">See my work</a>
-      <a href="#contact" class="btn btn-outline">Get in touch</a>
+  <header class="site-header" id="top">
+    <div class="wrap site-header__inner">
+      <a href="#top" class="brand">Josiah Yule<span class="brand__dot">.</span></a>
+      <nav class="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="#work">Work</a></li>
+          <li class="site-nav__optional"><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact" class="site-nav__cta">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
+  <main id="main" tabindex="-1">
 
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero__grid">
+        <p class="hero__intro">
+          <img class="hero__avatar" src="headshot-400.webp" alt="" width="400" height="500" decoding="async">
+          <span><strong>Josiah Yule</strong><br>Web designer and marketer in Halifax, NS</span>
+        </p>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="about-grid">
-      <div class="about-photo-wrap reveal">
-        <div class="about-photo" aria-label="Portrait of Josiah">
-          <img src="headshot-800.webp" srcset="headshot-400.webp 400w, headshot-800.webp 800w" sizes="(max-width: 900px) 280px, 320px" alt="Josiah Yule" width="800" height="1000" loading="lazy" decoding="async">
+        <h1 class="hero__title" id="hero-title">
+          <span class="line"><span>I design websites,</span></span>
+          <span class="line"><span>then I build them<span class="accent-dot">.</span></span></span>
+        </h1>
+
+        <div class="hero__aside">
+          <p class="hero__lede">Small businesses and community groups hire me for websites, brand identities, and social media. I handle the design and the build myself, so you work with one person from the first sketch to launch day.</p>
+          <div class="hero__actions">
+            <a href="#work" class="btn btn--solid">See the work <span class="i i--s" aria-hidden="true"></span></a>
+            <a href="#contact" class="btn btn--ghost">Start a project <span class="i i--e" aria-hidden="true"></span></a>
+          </div>
         </div>
       </div>
-      <div class="about-body reveal">
-        <p class="about-label">About</p>
-        <h2 class="about-headline">Marketing, development, and the stuff in between.</h2>
-        <p>My background is in marketing, and most of what I make sits between marketing and development. That combination came about because the projects I wanted to take on needed both sides, so I learned to build what I was designing.</p>
-        <p>Recent work includes recruitment websites with live job boards, a logo for an editorial consultancy, a community association site the board maintains themselves, and a few internal tools built to replace manual processes. I work with small businesses and organizations, usually as the only person on the project.</p>
+    </section>
 
-        <div class="stack">
-          <p class="stack-label">What I work with</p>
-          <ul class="stack-grid">
-            <li>HTML, CSS, JavaScript</li>
-            <li>React, Supabase</li>
-            <li>Python (scripting)</li>
-            <li>Node.js, automation</li>
-            <li>Google Apps Script</li>
-            <li>Chart.js, GA4</li>
-            <li>Squarespace (custom code)</li>
-            <li>Adobe Illustrator</li>
-          </ul>
+    <!-- WORK -->
+    <section class="work" id="work" aria-labelledby="work-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 class="section-head__title" id="work-title">Selected work</h2>
         </div>
       </div>
-    </div>
-  </section>
 
+      <!-- Project: staffing sites -->
+      <article class="project project--lead" id="staffing" aria-labelledby="staffing-title">
+        <div class="stack reveal" aria-label="Homepages of the three staffing websites" role="group">
+          <figure class="frame frame--back">
+            <span class="frame__bar" aria-hidden="true"><span>administrativestaffing.ca</span></span>
+            <img src="staffing-administrative-800.webp" srcset="staffing-administrative-800.webp 800w, staffing-administrative-1600.webp 1600w" sizes="(max-width: 800px) 78vw, 52vw" width="1600" height="901" alt="Administrative Staffing homepage" loading="lazy" decoding="async">
+          </figure>
+          <figure class="frame frame--mid">
+            <span class="frame__bar" aria-hidden="true"><span>accountantstaffing.ca</span></span>
+            <img src="staffing-accountant-800.webp" srcset="staffing-accountant-800.webp 800w, staffing-accountant-1600.webp 1600w" sizes="(max-width: 800px) 78vw, 52vw" width="1600" height="901" alt="Accountant Staffing homepage" loading="lazy" decoding="async">
+          </figure>
+          <figure class="frame frame--front">
+            <span class="frame__bar" aria-hidden="true"><span>integratedstaffing.ca</span></span>
+            <img src="staffing-integrated-800.webp" srcset="staffing-integrated-800.webp 800w, staffing-integrated-1600.webp 1600w" sizes="(max-width: 800px) 78vw, 52vw" width="1600" height="901" alt="Integrated Staffing homepage" loading="lazy" decoding="async">
+          </figure>
+        </div>
 
+        <div class="wrap project__text">
+          <h3 class="project__title" id="staffing-title">Three recruitment websites for sister agencies</h3>
+          <div class="project__body">
+            <p>Integrated Staffing, Accountant Staffing, and Administrative Staffing each needed their own site, built on a shared system so the three would feel related without looking identical. All three run on Squarespace with custom HTML, CSS, and JavaScript throughout, including job boards that pull live postings from an external API so listings stay current on their own.</p>
+            <ul class="project__links">
+              <li><a href="https://integratedstaffing.ca" target="_blank" rel="noopener">integratedstaffing.ca<span class="i i--ne" aria-hidden="true"></span><span class="visually-hidden"> (opens in a new tab)</span></a></li>
+              <li><a href="https://accountantstaffing.ca" target="_blank" rel="noopener">accountantstaffing.ca<span class="i i--ne" aria-hidden="true"></span><span class="visually-hidden"> (opens in a new tab)</span></a></li>
+              <li><a href="https://administrativestaffing.ca" target="_blank" rel="noopener">administrativestaffing.ca<span class="i i--ne" aria-hidden="true"></span><span class="visually-hidden"> (opens in a new tab)</span></a></li>
+            </ul>
+          </div>
+          <dl class="spec">
+            <div><dt>Client</dt><dd>Integrated Staffing Group</dd></div>
+            <div><dt>Role</dt><dd>Design and development</dd></div>
+            <div><dt>Built with</dt><dd>Squarespace, custom HTML, CSS, and JavaScript, a jobs API</dd></div>
+            <div><dt>Status</dt><dd><span class="live">Live</span></dd></div>
+          </dl>
+        </div>
+      </article>
 
-  <!-- SERVICES -->
-  <section id="services">
-    <div class="services-inner">
-      <p class="section-label">Services</p>
-      <h2 class="section-title">What I can help with.</h2>
+      <!-- Project: Claros -->
+      <article class="project project--split" id="claros" aria-labelledby="claros-title">
+        <div class="wrap project__grid">
+          <figure class="seal reveal" role="img" aria-label="The Claros seal: Apollo seated with a torch and a lyre, ringed by the words Claros and Editorial Consultancy, shown in its light and dark versions.">
+            <div class="seal__panel seal__panel--light"><span class="seal__mark"></span><span class="seal__cap">Light</span></div>
+            <div class="seal__panel seal__panel--dark"><span class="seal__mark"></span><span class="seal__cap">Dark</span></div>
+          </figure>
+          <div class="project__text">
+            <h3 class="project__title" id="claros-title">Logo for an editorial consultancy</h3>
+            <div class="project__body">
+              <p>Claros is named after an ancient shrine of Apollo in western Turkey, and the client wanted Apollo at the centre of the mark: seated toward the viewer, bare-chested with robes, holding a torch in one hand and a lyre in the other. I drew it in Illustrator as a stamp-style seal in a woodcut-influenced style, with the company name set in spaced capitals around the perimeter, and delivered it in light and dark versions.</p>
+            </div>
+            <dl class="spec">
+              <div><dt>Client</dt><dd>Claros</dd></div>
+              <div><dt>Role</dt><dd>Brand design</dd></div>
+              <div><dt>Made in</dt><dd>Adobe Illustrator</dd></div>
+              <div><dt>Delivered</dt><dd>Light and dark versions</dd></div>
+            </dl>
+          </div>
+        </div>
+      </article>
 
-      <div class="services-grid">
-        <article class="service-item reveal">
-          <p class="service-label">Web</p>
-          <h3>Website Development</h3>
-          <p>I design and build websites from scratch. That covers the layout and visual design, the front-end build, and the custom pieces a template won&rsquo;t handle on its own, like contact forms, API integrations, and job boards.</p>
+      <!-- Project: dashboard -->
+      <article class="project project--split project--flip" id="dashboard" aria-labelledby="dashboard-title">
+        <div class="wrap project__grid">
+          <figure class="frame frame--solo reveal">
+            <span class="frame__bar" aria-hidden="true"><span>Marketing dashboard</span></span>
+            <img src="dashboard-cover-800.webp" srcset="dashboard-cover-800.webp 800w, dashboard-cover-1600.webp 1600w" sizes="(max-width: 900px) 92vw, 58vw" width="1600" height="613" alt="The dashboard's summary panel: eight marketing figures such as posts published, impressions, and link clicks, each with its change from the previous quarter" loading="lazy" decoding="async">
+          </figure>
+          <div class="project__text">
+            <h3 class="project__title" id="dashboard-title">Marketing performance dashboard</h3>
+            <div class="project__body">
+              <p>Reporting on marketing performance meant pulling numbers out of Hootsuite, Squarespace Analytics, and GA4 separately, then assembling them by hand every month, and by the time a report was finished the figures were already stale. This dashboard pulls all three sources through a Google Apps Script endpoint into Google Sheets and renders them with Chart.js, so social performance, website analytics, and quarter-over-quarter movement are available at any point in the month.</p>
+            </div>
+            <dl class="spec">
+              <div><dt>Client</dt><dd>Integrated Staffing</dd></div>
+              <div><dt>Role</dt><dd>Design and development</dd></div>
+              <div><dt>Built with</dt><dd>Google Apps Script, Google Sheets, Chart.js</dd></div>
+              <div><dt>Status</dt><dd>Internal tool, in use</dd></div>
+            </dl>
+          </div>
+        </div>
+      </article>
+
+      <!-- Projects: residents association + job monitor -->
+      <div class="wrap pair">
+        <article class="project project--card" id="wwhra" aria-labelledby="wwhra-title">
+          <figure class="sitemap reveal" aria-labelledby="sitemap-caption">
+            <figcaption class="visually-hidden" id="sitemap-caption">The site is organized around four sections: events, community updates, resources, and contact.</figcaption>
+            <p class="sitemap__root" aria-hidden="true">wwhra<span>.com</span></p>
+            <ul class="sitemap__nodes" aria-hidden="true">
+              <li><span>Events</span></li>
+              <li><span>Community updates</span></li>
+              <li><span>Resources</span></li>
+              <li><span>Contact</span></li>
+            </ul>
+          </figure>
+          <h3 class="project__title" id="wwhra-title">Website for a residents association</h3>
+          <div class="project__body">
+            <p>The association needed one place for events, community updates, resources, and contact, run by board members who don&rsquo;t write code. I built it on WordPress and hosted it on Hostinger, structured around what residents come to the site looking for. The board has been updating it themselves since launch.</p>
+            <ul class="project__links">
+              <li><a href="https://www.wwhra.com" target="_blank" rel="noopener">wwhra.com<span class="i i--ne" aria-hidden="true"></span><span class="visually-hidden"> (opens in a new tab)</span></a></li>
+            </ul>
+          </div>
+          <dl class="spec">
+            <div><dt>Client</dt><dd>Westwood Hills Residents Association</dd></div>
+            <div><dt>Built with</dt><dd>WordPress, Hostinger</dd></div>
+            <div><dt>Status</dt><dd><span class="live">Live, updated by the board</span></dd></div>
+          </dl>
         </article>
-        <article class="service-item reveal">
-          <p class="service-label">Brand</p>
-          <h3>Brand Design</h3>
-          <p>I design logos, colour palettes, and visual guidelines, so a business looks consistent across its website, its social accounts, and anything it prints.</p>
-        </article>
-        <article class="service-item reveal">
-          <p class="service-label">Social</p>
-          <h3>Social Media Management</h3>
-          <p>I handle content planning, copywriting, and scheduling across LinkedIn, Instagram, and Facebook. This one works best as an ongoing arrangement, since the results come from posting consistently over months.</p>
+
+        <article class="project project--card" id="monitor" aria-labelledby="monitor-title">
+          <figure class="flow reveal" aria-labelledby="flow-caption">
+            <figcaption class="visually-hidden" id="flow-caption">How the job monitoring tool works: it checks three job boards, matches postings against the client list, then alerts consultants.</figcaption>
+            <div class="flow__col">
+              <p class="flow__label">Checks</p>
+              <ul class="flow__nodes">
+                <li>Job Bank</li>
+                <li>LinkedIn</li>
+                <li>Adzuna</li>
+              </ul>
+            </div>
+            <div class="flow__col flow__col--core">
+              <p class="flow__label">Matches</p>
+              <p class="flow__core">Client list<small>Names normalized, each match scored</small></p>
+            </div>
+            <div class="flow__col">
+              <p class="flow__label">Sends</p>
+              <ul class="flow__nodes flow__nodes--out">
+                <li>Slack alert to the consultant</li>
+                <li>Morning digest</li>
+              </ul>
+            </div>
+          </figure>
+          <h3 class="project__title" id="monitor-title">Job monitoring tool for recruiters</h3>
+          <div class="project__body">
+            <p>Recruitment consultants had no way of knowing when an existing client posted a job on a public board, so they often found out weeks late or not at all. This tool watches Job Bank, LinkedIn, and Adzuna on a schedule, matches new postings against the client list, and sends the right consultant a Slack alert plus a morning digest. Company names are written differently on every board, so matches are confidence-scored using normalization logic. It runs on a Python scraping pipeline behind a Supabase-backed dashboard the team shares.</p>
+          </div>
+          <dl class="spec">
+            <div><dt>Client</dt><dd>Integrated Staffing Group</dd></div>
+            <div><dt>Built with</dt><dd>Python, Supabase, Slack</dd></div>
+            <div><dt>Status</dt><dd>Internal tool, runs on a schedule</dd></div>
+          </dl>
         </article>
       </div>
+    </section>
 
-    </div>
-  </section>
-
-
-
-  <!-- WORK -->
-  <section id="work">
-    <p class="section-label">Projects</p>
-    <h2 class="section-title">Some things I&rsquo;ve built.</h2>
-
-    <ul class="work-list" id="workList">
-
-      <li class="work-entry reveal">
-        <div class="work-body">
-          <h3 class="work-title">Three recruitment websites for sister agencies.</h3>
-          <p class="work-meta"><span>Integrated Staffing Group</span><span>Web development</span></p>
-          <p class="work-desc">Integrated Staffing, Accountant Staffing, and Administrative Staffing each needed their own site, built on a shared system so the three would feel related without looking identical. All three run on Squarespace with custom HTML, CSS, and JavaScript throughout, including job boards that pull live postings from an external API so listings stay current on their own.</p>
-          <ul class="work-links">
-            <li><a href="https://integratedstaffing.ca" target="_blank" rel="noopener">integratedstaffing.ca <span aria-hidden="true">&#8599;</span></a></li>
-            <li><a href="https://accountantstaffing.ca" target="_blank" rel="noopener">accountantstaffing.ca <span aria-hidden="true">&#8599;</span></a></li>
-            <li><a href="https://administrativestaffing.ca" target="_blank" rel="noopener">administrativestaffing.ca <span aria-hidden="true">&#8599;</span></a></li>
-          </ul>
+    <!-- SERVICES -->
+    <section class="services" id="services" aria-labelledby="services-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 class="section-head__title" id="services-title">What I can help with</h2>
         </div>
-        <div class="work-thumb">
-          <img src="staffing-integrated-800.webp" srcset="staffing-integrated-800.webp 800w, staffing-integrated-1600.webp 1600w" sizes="(max-width: 900px) 92vw, 340px" alt="Integrated Staffing website homepage" loading="lazy" decoding="async">
-        </div>
-      </li>
 
-      <li class="work-entry reveal">
-        <div class="work-body">
-          <h3 class="work-title">Logo design for an editorial consultancy.</h3>
-          <p class="work-meta"><span>Claros</span><span>Brand design</span></p>
-          <p class="work-desc">Claros is named after an ancient shrine of Apollo in western Turkey, and the client wanted Apollo at the centre of the mark: seated toward the viewer, bare-chested with robes, holding a torch in one hand and a lyre in the other. I drew it in Illustrator as a stamp-style seal in a woodcut-influenced style, with the company name set in spaced capitals around the perimeter, and delivered it in light and dark versions.</p>
-        </div>
-        <div class="work-thumb">
-          <img src="logo-cover-800.webp" srcset="logo-cover-800.webp 800w, logo-cover-1600.webp 1600w" sizes="(max-width: 900px) 92vw, 340px" alt="Claros editorial consultancy seal with Apollo at the centre" loading="lazy" decoding="async">
-        </div>
-      </li>
-
-      <li class="work-entry reveal">
-        <div class="work-body">
-          <h3 class="work-title">Website for a residents association.</h3>
-          <p class="work-meta"><span>Westwood Hills Residents Association</span><span>Web development</span></p>
-          <p class="work-desc">The association needed one place for events, community updates, resources, and contact, run by board members who don&rsquo;t write code. I built it on WordPress and hosted it on Hostinger, structured around what residents come to the site looking for. The board has been updating it themselves since launch.</p>
-          <ul class="work-links">
-            <li><a href="https://www.wwhra.com" target="_blank" rel="noopener">wwhra.com <span aria-hidden="true">&#8599;</span></a></li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="work-entry reveal">
-        <div class="work-body">
-          <h3 class="work-title">Marketing performance dashboard.</h3>
-          <p class="work-meta"><span>Integrated Staffing</span><span>Data and reporting</span></p>
-          <p class="work-desc">Reporting on marketing performance meant pulling numbers out of Hootsuite, Squarespace Analytics, and GA4 separately, then assembling them by hand every month, and by the time a report was finished the figures were already stale. This dashboard pulls all three sources through a Google Apps Script endpoint into Google Sheets and renders them with Chart.js, so social performance, website analytics, and quarter-over-quarter movement are available at any point in the month.</p>
-        </div>
-        <div class="work-thumb">
-          <img src="dashboard-cover-800.webp" srcset="dashboard-cover-800.webp 800w, dashboard-cover-1600.webp 1600w" sizes="(max-width: 900px) 92vw, 340px" alt="Marketing performance dashboard showing KPI charts" loading="lazy" decoding="async">
-        </div>
-      </li>
-
-      <li class="work-entry reveal">
-        <div class="work-body">
-          <h3 class="work-title">Personal budgeting app.</h3>
-          <p class="work-meta"><span>Personal project</span><span>Product</span></p>
-          <p class="work-desc">Allowance tracks how much is left to spend in a given month. Users log income and expenses, set budgets by category, and watch the remaining balance update as they spend. It&rsquo;s a React and Supabase progressive web app, so it installs on a phone and runs like a native app off a single web codebase, and row-level security keeps each account&rsquo;s data isolated.</p>
-          <ul class="work-links">
-            <li><a href="https://allowance-flame.vercel.app" target="_blank" rel="noopener">allowance-flame.vercel.app <span aria-hidden="true">&#8599;</span></a></li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="work-entry reveal">
-        <div class="work-body">
-          <h3 class="work-title">Job monitoring tool for recruiters.</h3>
-          <p class="work-meta"><span>Integrated Staffing Group</span><span>Automation</span></p>
-          <p class="work-desc">Recruitment consultants had no way of knowing when an existing client posted a job on a public board, so they often found out weeks late or not at all. This tool watches Job Bank, LinkedIn, and Adzuna on a schedule, matches new postings against the client list, and sends the right consultant a Slack alert plus a morning digest. Company names are written differently on every board, so matches are confidence-scored using normalisation logic. It runs on a Python scraping pipeline behind a Supabase-backed dashboard the team shares.</p>
-        </div>
-      </li>
-
-    </ul>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="contact-inner">
-      <div class="contact-left">
-        <p class="section-label">Contact</p>
-        <h2 class="section-title">Let&rsquo;s work together.</h2>
-        <p class="contact-desc">Send me a note about what you&rsquo;re working on and I&rsquo;ll get back to you within a couple of business days.</p>
-
-        <ul class="contact-links">
-          <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/josiahyule" target="_blank" rel="noopener">linkedin.com/in/josiahyule</a></li>
+        <ul class="service-list">
+          <li class="service reveal">
+            <h3 class="service__name">Websites</h3>
+            <p class="service__desc">I design and build websites from scratch. That covers the layout and visual design, the front-end build, and the custom pieces a template won&rsquo;t handle on its own, like contact forms, API integrations, and job boards.</p>
+            <p class="service__see"><span>See</span> <a href="#staffing">Recruitment websites</a> <a href="#wwhra">Residents association</a></p>
+          </li>
+          <li class="service reveal">
+            <h3 class="service__name">Brand design</h3>
+            <p class="service__desc">I design logos, colour palettes, and visual guidelines, so a business looks consistent across its website, its social accounts, and anything it prints.</p>
+            <p class="service__see"><span>See</span> <a href="#claros">Claros seal</a></p>
+          </li>
+          <li class="service reveal">
+            <h3 class="service__name">Social media</h3>
+            <p class="service__desc">I handle content planning, copywriting, and scheduling across LinkedIn, Instagram, and Facebook. This one works best as an ongoing arrangement, since the results come from posting consistently over months.</p>
+            <p class="service__see"><span>See</span> <a href="#dashboard">How I report on it</a></p>
+          </li>
         </ul>
       </div>
+    </section>
 
-      <form class="contact-form" id="contactForm" action="https://formspree.io/f/xeevvkey" method="POST">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input id="firstName" name="firstName" type="text" autocomplete="given-name" required>
+    <!-- ABOUT -->
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="wrap about__grid">
+        <figure class="about__photo reveal">
+          <img src="headshot-800.webp" srcset="headshot-400.webp 400w, headshot-800.webp 800w" sizes="(max-width: 800px) 70vw, 34vw" width="800" height="1000" alt="Josiah Yule, sitting on concrete steps in a black shirt" loading="lazy" decoding="async">
+          <figcaption>Josiah Yule, Halifax</figcaption>
+        </figure>
+
+        <div class="about__text">
+          <p class="eyebrow">About</p>
+          <h2 class="about__title" id="about-title">I came to web development through marketing.</h2>
+          <div class="about__body">
+            <p>Most of what I make sits between the two. The projects I wanted to take on needed a designer and a developer, so I learned to build what I was designing.</p>
+            <p>I work with small businesses and organizations, usually as the only person on the project, so I plan the site with you, design it, and write the code myself.</p>
           </div>
-          <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input id="lastName" name="lastName" type="text" autocomplete="family-name" required>
+
+          <dl class="toolkit">
+            <div><dt>Code</dt><dd>HTML, CSS, JavaScript, React, Node.js, Python</dd></div>
+            <div><dt>Data</dt><dd>Supabase, Google Apps Script, Chart.js, GA4</dd></div>
+            <div><dt>Platforms</dt><dd>Squarespace with custom code, WordPress</dd></div>
+            <div><dt>Design</dt><dd>Adobe Illustrator</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap contact__grid">
+        <div class="contact__intro">
+          <p class="eyebrow">Contact</p>
+          <h2 class="contact__title" id="contact-title">Tell me about your project<span class="accent-dot">.</span></h2>
+          <p class="contact__desc">Send me a note about what you&rsquo;re working on and I&rsquo;ll get back to you within a couple of business days.</p>
+          <p class="contact__alt">You can also message me on <a href="https://www.linkedin.com/in/josiahyule" target="_blank" rel="noopener">LinkedIn<span class="i i--ne" aria-hidden="true"></span><span class="visually-hidden"> (opens in a new tab)</span></a>.</p>
+        </div>
+
+        <form class="form" id="contactForm" action="https://formspree.io/f/xeevvkey" method="POST" novalidate>
+          <div class="form__row">
+            <div class="field">
+              <label for="firstName">First name</label>
+              <input id="firstName" name="firstName" type="text" autocomplete="given-name" required>
+            </div>
+            <div class="field">
+              <label for="lastName">Last name</label>
+              <input id="lastName" name="lastName" type="text" autocomplete="family-name" required>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" required>
-        </div>
-        <div class="form-group">
-          <label for="service">What are you looking for?</label>
-          <select id="service" name="service" required>
-            <option value="">Select a service&hellip;</option>
-            <option>Website Development</option>
-            <option>Brand Design</option>
-            <option>Social Media Management</option>
-            <option>Something else</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="message">Tell me about your project</label>
-          <textarea id="message" name="message" rows="5" required minlength="20" autocomplete="off"></textarea>
-        </div>
-        <div class="form-group form-honeypot" aria-hidden="true">
-          <label for="website">Website</label>
-          <input id="website" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
-        </div>
-        <button class="form-submit" type="submit" id="submitBtn">Send Message</button>
-        <p class="form-privacy">Your details are only used to reply to this project inquiry.</p>
-        <p id="formStatus" role="alert" aria-live="polite"></p>
-      </form>
-    </div>
-  </section>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required>
+          </div>
+          <div class="field field--select">
+            <label for="service">What do you need?</label>
+            <select id="service" name="service" required>
+              <option value="">Choose one</option>
+              <option>Website</option>
+              <option>Brand design</option>
+              <option>Social media</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">Tell me about your project</label>
+            <textarea id="message" name="message" rows="5" required minlength="20" aria-describedby="messageHint"></textarea>
+            <p class="field__hint" id="messageHint">A few sentences is plenty. It helps to know what the business does and what you need.</p>
+          </div>
+          <div class="field field--trap" aria-hidden="true">
+            <label for="website">Leave this field empty</label>
+            <input id="website" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="form__foot">
+            <button class="btn btn--ink" type="submit" id="submitBtn">Send message <span class="i i--e" aria-hidden="true"></span></button>
+            <p class="form__privacy">I only use your details to reply to you.</p>
+          </div>
+          <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+    </section>
 
   </main>
 
-  <footer id="siteFooter">
-    <span>&copy; <span id="year"></span> Josiah Yule</span>
-    <span>Halifax, NS</span>
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <p>&copy; <span id="year">2026</span> Josiah Yule</p>
+      <p>Halifax, Nova Scotia</p>
+      <p><a href="#top">Back to top <span class="i i--n" aria-hidden="true"></span></a></p>
+    </div>
   </footer>
 
   <script src="portfolio.js" defer></script>

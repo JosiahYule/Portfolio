@@ -1,255 +1,143 @@
 /* =============================================================
-   Portfolio JS. Nav, contact form, reveal, scroll line.
+   Portfolio JS: header state, current-section marker, contact form.
+   Everything on the page is readable without this file.
    ============================================================= */
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* ===== Focus trap helper ===== */
-function getFocusable(container) {
-  return [...container.querySelectorAll(
-    'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-  )];
-}
+/* ===== Header border + current section in the nav ===== */
+const header = document.querySelector('.site-header');
+const navLinks = [...document.querySelectorAll('.site-nav a[href^="#"]')];
+const sections = navLinks
+  .map((a) => document.querySelector(a.getAttribute('href')))
+  .filter(Boolean);
 
-/* ===== Mobile nav ===== */
-const hamburger = document.getElementById('navHamburger');
-const navMobile = document.getElementById('navMobile');
-const siteContent = document.getElementById('siteContent');
-const siteFooter = document.getElementById('siteFooter');
-let navOpener = null;
+function updateNav() {
+  header.classList.toggle('is-scrolled', window.scrollY > 8);
 
-function setPageInert(inert) {
-  [siteContent, siteFooter].filter(Boolean).forEach((el) => {
-    if (inert) el.setAttribute('inert', '');
-    else el.removeAttribute('inert');
+  // The current section is the last one whose top has passed a line
+  // 35% down the viewport. Above the first section (the hero), none is.
+  const line = window.innerHeight * 0.35;
+  const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+  let current = null;
+  for (const section of sections) {
+    if (section.getBoundingClientRect().top <= line) current = section;
+  }
+  if (atBottom) current = sections[sections.length - 1];
+
+  navLinks.forEach((a) => {
+    if (current && a.getAttribute('href') === `#${current.id}`) a.setAttribute('aria-current', 'true');
+    else a.removeAttribute('aria-current');
   });
 }
 
-function handleNavTab(e) {
-  if (e.key !== 'Tab') return;
-  const focusable = getFocusable(navMobile);
-  if (!focusable.length) return;
-  const first = focusable[0];
-  const last = focusable[focusable.length - 1];
-  if (e.shiftKey && document.activeElement === first) {
-    e.preventDefault();
-    last.focus();
-  } else if (!e.shiftKey && document.activeElement === last) {
-    e.preventDefault();
-    first.focus();
-  }
-}
-
-function openMobileNav() {
-  navOpener = document.activeElement;
-  navMobile.classList.add('open');
-  navMobile.setAttribute('aria-hidden', 'false');
-  hamburger.classList.add('open');
-  hamburger.setAttribute('aria-expanded', 'true');
-  hamburger.setAttribute('aria-label', 'Close menu');
-  document.body.classList.add('nav-open');
-  setPageInert(true);
-  document.addEventListener('keydown', handleNavTab);
-  setTimeout(() => navMobile.querySelector('a')?.focus(), 50);
-}
-
-function closeMobileNav({ restoreFocus = true } = {}) {
-  navMobile.classList.remove('open');
-  navMobile.setAttribute('aria-hidden', 'true');
-  hamburger.classList.remove('open');
-  hamburger.setAttribute('aria-expanded', 'false');
-  hamburger.setAttribute('aria-label', 'Open menu');
-  document.body.classList.remove('nav-open');
-  setPageInert(false);
-  document.removeEventListener('keydown', handleNavTab);
-  if (restoreFocus && navOpener) navOpener.focus();
-  navOpener = null;
-}
-
-hamburger.addEventListener('click', () => {
-  if (navMobile.classList.contains('open')) closeMobileNav();
-  else openMobileNav();
-});
-navMobile.querySelectorAll('a').forEach((a) => {
-  a.addEventListener('click', () => closeMobileNav({ restoreFocus: false }));
-});
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && navMobile.classList.contains('open')) closeMobileNav();
-});
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => { updateNav(); ticking = false; });
+}, { passive: true });
+window.addEventListener('resize', updateNav, { passive: true });
+updateNav();
 
 /* ===== Contact form ===== */
-const contactForm = document.getElementById('contactForm');
+const form = document.getElementById('contactForm');
 const submitBtn = document.getElementById('submitBtn');
 const formStatus = document.getElementById('formStatus');
 
-if (contactForm) {
-  contactForm.addEventListener('submit', async (e) => {
+const messages = {
+  firstName: { valueMissing: 'Please add your first name.' },
+  lastName:  { valueMissing: 'Please add your last name.' },
+  email:     { valueMissing: 'Please add your email so I can reply.', typeMismatch: 'That email address looks incomplete.' },
+  service:   { valueMissing: 'Please choose what you need.' },
+  message:   { valueMissing: 'Please tell me a little about the project.', tooShort: 'A little more detail would help. Twenty characters or more.' },
+};
+
+function errorFor(field) {
+  const v = field.validity;
+  const m = messages[field.name] || messages[field.id] || {};
+  if (v.valueMissing) return m.valueMissing || 'This field is required.';
+  if (v.typeMismatch) return m.typeMismatch || 'Please check this field.';
+  if (v.tooShort) return m.tooShort || 'Please add a little more.';
+  return '';
+}
+
+function showError(field) {
+  const wrap = field.closest('.field');
+  const id = `${field.id}-error`;
+  let el = document.getElementById(id);
+  const text = errorFor(field);
+
+  if (!text) {
+    wrap.classList.remove('is-invalid');
+    field.removeAttribute('aria-invalid');
+    if (el) el.remove();
+    const describedBy = (field.getAttribute('aria-describedby') || '').split(' ').filter((t) => t && t !== id);
+    if (describedBy.length) field.setAttribute('aria-describedby', describedBy.join(' '));
+    else field.removeAttribute('aria-describedby');
+    return true;
+  }
+
+  wrap.classList.add('is-invalid');
+  field.setAttribute('aria-invalid', 'true');
+  if (!el) {
+    el = document.createElement('p');
+    el.className = 'field__error';
+    el.id = id;
+    wrap.appendChild(el);
+    const describedBy = new Set((field.getAttribute('aria-describedby') || '').split(' ').filter(Boolean));
+    describedBy.add(id);
+    field.setAttribute('aria-describedby', [...describedBy].join(' '));
+  }
+  el.textContent = text;
+  return false;
+}
+
+if (form) {
+  const fields = [...form.querySelectorAll('input:not([name="_gotcha"]), select, textarea')];
+
+  // Validate a field once the visitor leaves it, then live while they fix it.
+  fields.forEach((field) => {
+    field.addEventListener('blur', () => { if (field.value || field.closest('.is-invalid')) showError(field); });
+    field.addEventListener('input', () => { if (field.closest('.is-invalid')) showError(field); });
+    field.addEventListener('change', () => { if (field.closest('.is-invalid')) showError(field); });
+  });
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    submitBtn.textContent = 'Sending…';
+    formStatus.textContent = '';
+
+    const invalid = fields.filter((field) => !showError(field));
+    if (invalid.length) {
+      invalid[0].focus();
+      return;
+    }
+
+    const label = submitBtn.innerHTML;
     submitBtn.disabled = true;
-    formStatus.style.display = 'none';
+    submitBtn.textContent = 'Sending…';
 
     try {
-      const res = await fetch(contactForm.action, {
+      const res = await fetch(form.action, {
         method: 'POST',
-        body: new FormData(contactForm),
-        headers: { 'Accept': 'application/json' }
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
       });
+      if (!res.ok) throw new Error(`Form service returned ${res.status}`);
 
-      if (res.ok) {
-        contactForm.innerHTML = `
-          <div class="form-success">
-            <p class="form-success-title">Message sent.</p>
-            <p class="form-success-body">Thanks for reaching out. I’ll get back to you within a couple of business days.</p>
-          </div>
-        `;
-      } else {
-        submitBtn.textContent = 'Send Message';
-        submitBtn.disabled = false;
-        formStatus.textContent = 'Something went wrong. Please try again or message me on LinkedIn.';
-        formStatus.style.display = 'block';
-      }
+      const done = document.createElement('div');
+      done.className = 'form-done';
+      done.tabIndex = -1;
+      done.innerHTML = `
+        <h3 class="form-done__title">Message sent.</h3>
+        <p>Thanks for reaching out. I&rsquo;ll get back to you within a couple of business days.</p>
+      `;
+      form.replaceWith(done);
+      done.focus();
     } catch (_) {
-      submitBtn.textContent = 'Send Message';
       submitBtn.disabled = false;
-      formStatus.textContent = 'Something went wrong. Please try again or message me on LinkedIn.';
-      formStatus.style.display = 'block';
+      submitBtn.innerHTML = label;
+      formStatus.textContent = 'Your message didn’t send. Please try again, or message me on LinkedIn.';
     }
   });
 }
-
-/* ===== Reveal on scroll ===== */
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((e) => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      io.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
-
-/* ===== Active nav section ===== */
-const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-const navObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (!entry.isIntersecting) return;
-    const id = entry.target.id;
-    navLinks.forEach((a) => {
-      const active = a.getAttribute('href') === `#${id}`;
-      a.classList.toggle('nav-active', active);
-      if (active) a.setAttribute('aria-current', 'page');
-      else a.removeAttribute('aria-current');
-    });
-  });
-}, { rootMargin: '-10% 0px -80% 0px', threshold: 0 });
-['about', 'services', 'work', 'contact'].forEach((id) => {
-  const el = document.getElementById(id);
-  if (el) navObserver.observe(el);
-});
-
-/* ===== Scroll line ===== */
-(function initScrollLine() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.innerWidth < 700) return;
-
-  const NS = 'http://www.w3.org/2000/svg';
-  const svg = document.createElementNS(NS, 'svg');
-  svg.id = 'scroll-line-svg';
-  svg.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(svg);
-
-  const pathEl = document.createElementNS(NS, 'path');
-  pathEl.id = 'scroll-line-path';
-  svg.appendChild(pathEl);
-
-  let totalLen = 0;
-
-  function docTop(el) {
-    return el.getBoundingClientRect().top + window.scrollY;
-  }
-
-  function buildPath() {
-    const W = document.documentElement.clientWidth;
-    const H = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-
-    svg.setAttribute('width', W);
-    svg.setAttribute('height', H);
-    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-
-    // Collect section boundary y positions
-    const sectionEls = [
-      document.querySelector('.hero'),
-      document.getElementById('about'),
-      document.getElementById('services'),
-      document.getElementById('work'),
-      document.getElementById('contact'),
-    ].filter(Boolean);
-
-    if (!sectionEls.length) return;
-
-    const ys = sectionEls.map((el) => docTop(el));
-    ys.push(H);
-
-    // Margin for vertical edge segments — gives the snake its side rails
-    const MX = 20;
-    const LX = MX;        // left rail x
-    const RX = W - MX;    // right rail x
-
-    // Snake: drop in left margin → sweep right → drop in right margin → sweep left → repeat
-    let d = `M ${LX} 0`;
-
-    for (let i = 0; i < ys.length - 1; i++) {
-      const y0 = ys[i];
-      const y1 = ys[i + 1];
-      if (i % 2 === 0) {
-        d += ` L ${LX} ${y0} L ${RX} ${y0} L ${RX} ${y1}`; // drop left, sweep right, drop right
-      } else {
-        d += ` L ${RX} ${y0} L ${LX} ${y0} L ${LX} ${y1}`; // drop right, sweep left, drop left
-      }
-    }
-    // Final edge drop to page bottom
-    const finalX = (ys.length - 1) % 2 === 0 ? LX : RX;
-    d += ` L ${finalX} ${H}`;
-
-    pathEl.setAttribute('d', d);
-    totalLen = pathEl.getTotalLength();
-    pathEl.style.strokeDasharray = totalLen;
-    updateOffset();
-  }
-
-  function updateOffset() {
-    if (!totalLen) return;
-    const maxScroll = document.body.scrollHeight - window.innerHeight;
-    const ratio = maxScroll > 0 ? window.scrollY / maxScroll : 0;
-    // Pre-draw enough to show the first sweep on load, then draw the rest with scroll
-    const drawn = document.documentElement.clientWidth + ratio * (totalLen - document.documentElement.clientWidth);
-    pathEl.style.strokeDashoffset = totalLen - drawn;
-  }
-
-  let raf;
-  window.addEventListener('scroll', () => {
-    cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(updateOffset);
-  }, { passive: true });
-
-  let resizeTimer;
-  const scheduleBuild = (delay = 150) => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(buildPath, delay);
-  };
-
-  window.addEventListener('resize', () => scheduleBuild(), { passive: true });
-
-  // Rebuild only when primary content regions change size, avoiding a body-wide observer.
-  if ('ResizeObserver' in window) {
-    const ro = new ResizeObserver(() => scheduleBuild(120));
-    [document.querySelector('.hero'), ...document.querySelectorAll('main > section')].filter(Boolean).forEach((el) => ro.observe(el));
-  }
-
-  if (document.readyState === 'complete') {
-    buildPath();
-  } else {
-    window.addEventListener('load', buildPath);
-  }
-}());
