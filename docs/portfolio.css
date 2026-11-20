@@ -359,31 +359,39 @@ main:focus { outline: none; }
 }
 .gallery__main { grid-row: 1 / span 2; }
 
-/* Claros: the seal is one transparent image used as a mask,
-   so the light and dark versions come from the same file. */
-.claros { align-items: start; }
-.seal {
-  grid-column: 1 / span 5;
-  grid-row: 1 / span 2;
+/* Claros: the seal is the page's one large image, shown big
+   enough to see the linework. It is a transparent image used as a
+   mask, so the dark panel and the small light detail come from the
+   same file. */
+.seal-hero {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 0;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  margin: 0 0 var(--gap);
   border: 1px solid var(--rule);
+  background: #141311;
+  color: #ECE8DF;
 }
-.seal__panel {
+.seal-hero .seal__mark { width: 44%; }
+.claros { align-items: start; }
+.seal-detail {
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 2;
   display: grid;
   place-items: center;
   aspect-ratio: 1;
-  padding: 10%;
+  margin: 0;
+  padding: 12%;
+  border: 1px solid var(--rule);
+  background: #F4F1EA;
+  color: #141311;
 }
-.seal__panel--light { background: #F4F1EA; color: #141311; }
-.seal__panel--dark  { background: #141311; color: #ECE8DF; }
 .seal__mark {
   width: 100%;
   aspect-ratio: 1;
   background: currentColor;
-  -webkit-mask: url('claros-seal-640.webp') center / contain no-repeat;
-          mask: url('claros-seal-640.webp') center / contain no-repeat;
+  -webkit-mask: url('claros-seal-1400.webp') center / contain no-repeat;
+          mask: url('claros-seal-1400.webp') center / contain no-repeat;
 }
 .claros__site { grid-column: 7 / -1; }
 .claros .project__body { grid-row: 2; }
@@ -580,12 +588,26 @@ main:focus { outline: none; }
   color: var(--band-ink);
 }
 .site-footer__inner {
+  align-items: end;
+  row-gap: 1.5rem;
+  padding: 1.4rem 0 1.6rem;
+  border-top: 1px solid var(--band-ink);
+}
+/* Colophon: how the site was made, as at the back of a book.
+   Each typeface is named in itself. */
+.colophon {
+  grid-column: 1 / span 5;
+  max-width: 40ch;
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+.colophon__mono { font: 450 0.8em / 1 var(--mono); }
+.site-footer__meta {
+  grid-column: 7 / -1;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 0.5rem 2rem;
-  padding: 1rem 0 1.4rem;
-  border-top: 1px solid var(--band-ink);
   font: 450 0.68rem / 1.5 var(--mono);
 }
 .site-footer a { font-size: 1em; text-decoration: none; }
@@ -602,8 +624,8 @@ main:focus { outline: none; }
 
   .gallery { margin-right: var(--gutter); border-right: 1px solid var(--rule); }
 
-  .seal { grid-column: 1 / span 8; grid-row: auto; }
-  .claros__site { grid-column: 3 / -1; grid-row: auto; margin-top: var(--gap); }
+  .seal-detail { grid-column: 1 / span 4; grid-row: 1; }
+  .claros__site { grid-column: 5 / -1; grid-row: 1; }
   .claros .project__body { grid-row: auto; }
   .wwhra__site { grid-column: 1 / span 11; }
 
@@ -615,6 +637,9 @@ main:focus { outline: none; }
   .form,
   .form-done { grid-column: 1 / -1; }
   .form { max-width: 36rem; }
+
+  .colophon,
+  .site-footer__meta { grid-column: 1 / -1; }
 }
 
 @media (max-width: 600px) {
@@ -630,14 +655,16 @@ main:focus { outline: none; }
   .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; }
   .gallery__main { grid-row: auto; grid-column: 1 / -1; }
 
-  .seal { grid-column: 1 / -1; }
+  .seal-hero { aspect-ratio: 1; }
+  .seal-hero .seal__mark { width: 78%; }
+  .seal-detail { display: none; }
   .claros__site,
   .wwhra__site { grid-column: 1 / -1; }
 
 
   .form__row { grid-template-columns: 1fr; }
   .kit > div { grid-template-columns: 5.5rem 1fr; }
-  .site-footer__inner { flex-direction: column; gap: 0.25rem; }
+  .site-footer__meta { flex-direction: column; gap: 0.25rem; }
 }
 
 /* ===== Dark theme adjustments ===== */
