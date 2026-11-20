@@ -31,7 +31,7 @@ Projects live in the `#work` section of `docs/index.html`. Each is an `<article 
 
 Screenshots should be WebP with an 800w and 1600w variant, matching the `srcset` shape used by the staffing entries.
 
-The Claros seal (`claros-seal-640.webp`) is a transparent image used as a CSS mask, so the light and dark panels come from one file. `logo-cover.jpg` is the 3000px source it was cut from (it is a PNG despite the extension). The headshot files are no longer shown on the page; `headshot-800.webp` is still referenced by the structured data in `<head>`.
+The Claros seal (`claros-seal-1400.webp`) is a transparent image used as a CSS mask, so the large dark panel and the small light detail come from one file. `logo-cover.jpg` is the 3000px source it was cut from (it is a PNG despite the extension). The headshot files are no longer shown on the page; `headshot-800.webp` is still referenced by the structured data in `<head>`.
 
 ## Local preview
 
