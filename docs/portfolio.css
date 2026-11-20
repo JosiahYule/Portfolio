@@ -194,6 +194,23 @@ main:focus { outline: none; }
   text-decoration: none;
 }
 
+/* ===== Dark brown top: header and hero =====
+   The page tokens are redefined inside this block, so every link,
+   hover and rule below works on brown without its own rules.
+   Same brown in both themes, like the contact band. */
+.site-header,
+.hero {
+  --paper:  #2E2018;
+  --ink:    #F3EADF;   /* 13.2:1 on the brown */
+  --ink-2:  #D3C5B4;   /*  9.3:1 */
+  --muted:  #AE9C88;   /*  5.9:1 */
+  --rule:   rgba(243, 234, 223, 0.2);
+  background: var(--paper);
+  color: var(--ink);
+}
+.site-header :focus-visible,
+.hero :focus-visible { outline-color: var(--ink); }
+
 /* ===== Header ===== */
 .site-header {
   border-bottom: 1px solid var(--rule);
@@ -276,7 +293,10 @@ main:focus { outline: none; }
 }
 
 /* ===== Work ===== */
-.work { padding-bottom: clamp(5rem, 10vw, 9rem); }
+.work {
+  padding-top: clamp(3rem, 6vw, 5rem);
+  padding-bottom: clamp(5rem, 10vw, 9rem);
+}
 
 .project + .project { margin-top: clamp(6rem, 12vw, 11rem); }
 .project__title {

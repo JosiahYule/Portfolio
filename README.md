@@ -19,7 +19,7 @@ Two typefaces, each with a job. Newsreader is the design voice (headings, names,
 
 Everything sits on one 12-column grid. Names and pictures sit on the left; every paragraph starts on column 7, so the text forms a single column down the page. The staffing gallery is the one element allowed off the grid: it runs to the right edge of the screen.
 
-Colour tokens live at the top of `portfolio.css`, with a dark set under `prefers-color-scheme: dark`. Vermilion is kept for the contact band, where you act. Keep it there.
+Colour tokens live at the top of `portfolio.css`, with a dark set under `prefers-color-scheme: dark`. The header and hero sit on a dark brown (`#2E2018`), the same in both themes. That block redefines the page's colour tokens for itself, so links and rules inside it need no extra styles. Vermilion is kept for the contact band, where you act. Keep it there.
 
 ## Editing projects
 
