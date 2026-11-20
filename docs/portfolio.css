@@ -222,22 +222,14 @@ main:focus { outline: none; }
   gap: 1rem;
   padding: 1.1rem 0 1rem;
 }
-.brand {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 0.2rem 1.1rem;
-}
 .brand a {
   font-size: 1.2rem;
   font-weight: 450;
   letter-spacing: -0.01em;
   text-decoration: none;
 }
-.brand__role {
-  font: 450 var(--f-mono) / 1.4 var(--mono);
-  color: var(--muted);
-}
+/* Same vermilion as the contact band, so the top and bottom of the page match */
+.brand__dot { color: var(--band); }
 .site-nav ul {
   display: flex;
   gap: clamp(0.9rem, 2.4vw, 2rem);
@@ -629,7 +621,6 @@ main:focus { outline: none; }
 }
 
 @media (max-width: 600px) {
-  .brand__role { display: none; }
   .site-nav__optional { display: none; }
 
   .hero__build { padding-left: 0; font-size: 0.5em; margin-top: 0.3em; white-space: normal; }
