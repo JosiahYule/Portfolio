@@ -1,44 +1,9 @@
 /* =============================================================
-   Portfolio JS: header state, current-section marker, contact form.
+   Portfolio JS: footer year and the contact form.
    Everything on the page is readable without this file.
    ============================================================= */
 
 document.getElementById('year').textContent = new Date().getFullYear();
-
-/* ===== Header border + current section in the nav ===== */
-const header = document.querySelector('.site-header');
-const navLinks = [...document.querySelectorAll('.site-nav a[href^="#"]')];
-const sections = navLinks
-  .map((a) => document.querySelector(a.getAttribute('href')))
-  .filter(Boolean);
-
-function updateNav() {
-  header.classList.toggle('is-scrolled', window.scrollY > 8);
-
-  // The current section is the last one whose top has passed a line
-  // 35% down the viewport. Above the first section (the hero), none is.
-  const line = window.innerHeight * 0.35;
-  const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
-  let current = null;
-  for (const section of sections) {
-    if (section.getBoundingClientRect().top <= line) current = section;
-  }
-  if (atBottom) current = sections[sections.length - 1];
-
-  navLinks.forEach((a) => {
-    if (current && a.getAttribute('href') === `#${current.id}`) a.setAttribute('aria-current', 'true');
-    else a.removeAttribute('aria-current');
-  });
-}
-
-let ticking = false;
-window.addEventListener('scroll', () => {
-  if (ticking) return;
-  ticking = true;
-  requestAnimationFrame(() => { updateNav(); ticking = false; });
-}, { passive: true });
-window.addEventListener('resize', updateNav, { passive: true });
-updateNav();
 
 /* ===== Contact form ===== */
 const form = document.getElementById('contactForm');

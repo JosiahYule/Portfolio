@@ -5,7 +5,7 @@ Personal portfolio for Josiah Yule, served from `docs/` via GitHub Pages at [www
 ## Structure
 
 - `docs/index.html` holds the whole site: hero, work, services, about, contact
-- `docs/portfolio.css` / `docs/portfolio.js` hold the styles and behaviour. The page is fully readable with JavaScript off; the script only adds the header border, the current-section dot in the nav, and form validation.
+- `docs/portfolio.css` / `docs/portfolio.js` hold the styles and behaviour. The page is fully readable with JavaScript off; the script only sets the footer year and handles form validation and sending.
 - `docs/fonts/` holds self-hosted variable fonts: Newsreader (headings and text) and Martian Mono (labels, specs, buttons). Both are trimmed to the weight range the site uses.
 - `docs/work/<id>/index.html` are redirect stubs for the retired case-study URLs. Each one sends old links to its project on the home page (for example `/work/logodesign/` goes to `/#claros`).
 
@@ -13,21 +13,25 @@ There is no build step. Everything is static and edited by hand.
 
 ## Design system
 
-Colour tokens live at the top of `portfolio.css`, with a dark set under `prefers-color-scheme: dark`. Vermilion is the only accent and it has three jobs: things you can act on (the contact band, button hovers), things that are live (the dot in a spec sheet's Status row), and where you are (the dot beside the current nav link). Keep it to those jobs.
+The look is a quiet brutalism: one continuous sheet of paper ruled in ink, square corners, no shadows, no rounded pills, and links that fill in with ink on hover instead of fading.
+
+Two typefaces, each with a job. Newsreader is the design voice (headings, names, paragraphs). Martian Mono is the build voice (labels, links, addresses, buttons). The hero says this out loud: "I design websites," is set in Newsreader and "then I build them." in Martian Mono.
+
+Everything sits on one 12-column grid. Names and pictures sit on the left; every paragraph starts on column 7, so the text forms a single column down the page. The staffing gallery is the one element allowed off the grid: it runs to the right edge of the screen.
+
+Colour tokens live at the top of `portfolio.css`, with a dark set under `prefers-color-scheme: dark`. Vermilion is kept for the contact band, where you act. Keep it there.
 
 ## Editing projects
 
-Projects live in the `#work` section of `docs/index.html`. There are three layouts:
+Projects live in the `#work` section of `docs/index.html`. Each is an `<article class="project">` with a `project__title` (the client's name), its pictures, and a `project__body` paragraph on the text column.
 
-- `project--lead` is the three staffing sites, shown as a stack of browser frames with the text and spec sheet underneath.
-- `project--split` puts an image beside the text. Add `project--flip` to swap sides.
-- `project--card` is for projects without a screenshot. The two cards sit side by side inside `.pair` and carry a small diagram instead.
+- Every screenshot is an `<a class="shot">` linking to the live site, with a `shot__tag` in its corner naming the address.
+- `.gallery` is the three staffing sites: one large, two stacked, on a 1px ink grid.
+- `.claros` puts the seal (light and dark) beside the site screenshot. `.wwhra` is a single wide screenshot with the text tucked under its right side.
 
-Every project ends with a `<dl class="spec">` spec sheet. Wrap a status in `<span class="live">` only when the project is public and running.
+Screenshots should be WebP with an 800w and 1600w variant, matching the `srcset` shape used by the staffing entries.
 
-Screenshots should be WebP with an 800w and 1600w variant, matching the `srcset` shape used by the existing entries. Put them in a `<figure class="frame">` with a `frame__bar` naming the site.
-
-The Claros seal (`claros-seal-640.webp`) is a transparent image used as a CSS mask, so the light and dark panels come from one file. `logo-cover.jpg` is the 3000px source it was cut from (it is a PNG despite the extension).
+The Claros seal (`claros-seal-640.webp`) is a transparent image used as a CSS mask, so the light and dark panels come from one file. `logo-cover.jpg` is the 3000px source it was cut from (it is a PNG despite the extension). The headshot files are no longer shown on the page; `headshot-800.webp` is still referenced by the structured data in `<head>`.
 
 ## Local preview
 
