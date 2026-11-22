@@ -17,7 +17,9 @@ The look is a quiet brutalism: one continuous sheet of paper ruled in ink, squar
 
 Two typefaces, each with a job. Newsreader is the design voice (headings, names, paragraphs). Martian Mono is the build voice (labels, links, addresses, buttons). The hero says this out loud: "I design websites," is set in Newsreader and "then I build them." in Martian Mono.
 
-The hero is a poster. "I design websites," is sized to run exactly edge to edge using container query units: `.hero > .wrap` is a size container, so `1cqi` is 1% of its width. The line is 6.565 times as wide as its font size, so `font-size: 15.2cqi` (100 / 6.565) fills it. **If you change the wording of that line, this number must change too.** Measure the new line's width at a font size of 100px in the browser, then use 100 / (width / 100). Phones use a slightly larger figure (15.7) because the typeface draws narrower letters at small sizes.
+The hero is a poster. "I design websites," is sized to run exactly edge to edge using container query units: `.hero > .wrap` is a size container, so `1cqi` is 1% of its width. The line is 6.565 times as wide as its font size, so `font-size: 15.2cqi` (100 / 6.565) fills it. **If you change the wording of that line, this number must change too.** Measure the new line's width at a font size of 100px in the browser, then use 100 / (width / 100). Check it in Safari as well as Chrome: Safari draws this line slightly wider at phone sizes.
+
+On phones the header and hero fill the whole screen, down behind Safari's floating toolbar. The hero uses `100lvh` (the full screen height) and adds `100lvh - 100svh` (the toolbar's height) to its bottom padding so the intro stays clear of the toolbar. The `html` element is brown and `body` is paper; iPhone Safari tints the strip behind the clock with the root background, so this keeps it brown.
 
 The page varies its scale on purpose: two large features (staffing, Claros), one brief (Westwood Hills), and Services set as one large sentence with small notes underneath.
 
