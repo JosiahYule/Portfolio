@@ -217,10 +217,10 @@ main:focus { outline: none; }
 }
 .site-header__inner {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1.1rem 0 1rem;
+  height: 4rem;   /* fixed, so the hero below can fill exactly the rest of the screen */
 }
 .brand a {
   font-size: 1.2rem;
@@ -246,19 +246,25 @@ main:focus { outline: none; }
   padding: clamp(2.5rem, 6vw, 5rem) 0 clamp(2.5rem, 5vw, 4rem);
 }
 .hero > .wrap { container-type: inline-size; }
+/* The header plus the hero fill the screen when the page opens.
+   svh is the screen height with the browser's own bars showing, so
+   on a phone the intro never sits under the address bar. */
+.hero {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - 4rem - 1px);   /* minus the header and its rule */
+}
+.hero > .wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(3rem, 7vw, 6rem);
+}
+/* On wider screens, cap the height so tall portrait tablets keep
+   poster proportions instead of a long empty block */
 @media (min-width: 601px) {
-  .hero {
-    display: flex;
-    flex-direction: column;
-    min-height: min(calc(100svh - 4.15rem), 62vw);   /* fill the screen, but keep poster proportions on tall screens */
-  }
-  .hero > .wrap {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: clamp(3rem, 7vw, 6rem);
-  }
+  .hero { min-height: min(calc(100svh - 4rem - 1px), 62vw); }
 }
 .hero__design,
 .hero__build { display: block; }
@@ -675,7 +681,6 @@ main:focus { outline: none; }
   .site-nav__optional { display: none; }
 
   .hero__design { font-size: 15.7cqi; }   /* small sizes draw slightly narrower */
-  .hero__foot { margin-top: 2.5rem; }
   .hero__lede,
   .hero__cta,
   .project__body,
