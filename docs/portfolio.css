@@ -236,44 +236,60 @@ main:focus { outline: none; }
 }
 .site-nav a { text-decoration: none; padding: 0.2rem 0; }
 
-/* ===== Hero ===== */
+/* ===== Hero =====
+   A poster. The design line is sized to run exactly edge to edge:
+   the wrap is a size container, so 1cqi is 1% of its width, and the
+   line is 6.565 times as wide as its font size. 100 / 6.565 = 15.2.
+   The build line becomes a small caption under its right end, and
+   the intro drops to the bottom left. */
 .hero {
-  padding: clamp(3rem, 9vw, 8rem) 0 clamp(3.5rem, 8vw, 7rem);
+  padding: clamp(2.5rem, 6vw, 5rem) 0 clamp(2.5rem, 5vw, 4rem);
 }
-.hero__title { font-size: var(--f-hero); }
+.hero > .wrap { container-type: inline-size; }
+@media (min-width: 601px) {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    min-height: min(calc(100svh - 4.15rem), 62vw);   /* fill the screen, but keep poster proportions on tall screens */
+  }
+  .hero > .wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: clamp(3rem, 7vw, 6rem);
+  }
+}
 .hero__design,
 .hero__build { display: block; }
 .hero__design {
+  font-size: var(--f-hero);   /* fallback for browsers without cqi */
+  font-size: 15.2cqi;
   font-weight: 300;
-  line-height: 0.95;
+  line-height: 0.9;
   letter-spacing: -0.045em;
+  white-space: nowrap;
 }
-/* The build half of the sentence, set in the code typeface. It sits
-   on the text column, so the sentence steps from the design side of
-   the page to the build side. */
+/* The build half of the sentence, in the code typeface */
 .hero__build {
-  margin-top: 0.12em;
-  padding-left: calc(50% + var(--gap) / 2);
+  margin-top: 0.9rem;
+  text-align: right;
   font-family: var(--mono);
-  font-size: 0.39em;
+  font-size: max(1rem, 2.6cqi);
   font-weight: 400;
   font-stretch: 87.5%;
-  white-space: nowrap;
   line-height: 1.1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
-.hero__foot {
-  margin-top: clamp(3rem, 7vw, 6rem);
-  row-gap: 1.5rem;
-}
+.hero__foot { row-gap: 1.5rem; }
 .hero__lede {
-  grid-column: 7 / -1;
-  max-width: 34ch;
+  grid-column: 1 / span 5;
+  max-width: 36ch;
   font-size: var(--f-lede);
   line-height: 1.45;
   color: var(--ink-2);
 }
-.hero__cta { grid-column: 7 / -1; }
+.hero__cta { grid-column: 1 / span 5; }
 
 /* ===== Sections ===== */
 .section { padding-top: clamp(1rem, 2vw, 1.5rem); }
@@ -396,30 +412,43 @@ main:focus { outline: none; }
 .claros__site { grid-column: 7 / -1; }
 .claros .project__body { grid-row: 2; }
 
-/* Residents association: the picture reaches past the text column
-   and the paragraph tucks under its right side. */
-.wwhra__site { grid-column: 1 / span 8; }
-.wwhra .project__body { grid-row: 2; }
-
-/* ===== Services ===== */
-.services { padding-bottom: clamp(5rem, 10vw, 9rem); }
-.service {
-  align-items: baseline;
-  row-gap: 1rem;
-  padding: clamp(1.5rem, 3vw, 2.4rem) 0;
-  border-top: 1px solid var(--line);
-}
-.service:first-child { border-top: 0; padding-top: 0; }
-.service__name {
-  grid-column: 1 / span 6;
+/* Residents association: a brief, not a feature. A smaller picture
+   with a smaller title beside it, so the two projects above read as
+   the main stories. */
+.wwhra { align-items: start; row-gap: 1.75rem; }
+.wwhra__site { grid-column: 1 / span 5; }
+.wwhra__text { grid-column: 7 / -1; }
+.project__title--brief {
   font-size: var(--f-big);
-  font-weight: 300;
-  line-height: 1.05;
-  letter-spacing: -0.035em;
+  max-width: 18ch;
+  margin-bottom: 1.25rem;
 }
-.service__desc {
-  grid-column: 7 / -1;
-  max-width: 54ch;
+.wwhra .project__body { margin-top: 0; }
+
+/* ===== Services =====
+   One sentence in large type, with the detail as small notes. */
+.services { padding-bottom: clamp(5rem, 10vw, 9rem); }
+.services__line {
+  max-width: 12em;
+  font-size: clamp(2.5rem, 6.4vw, 6.6rem);
+  font-weight: 300;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+.service-notes {
+  margin-top: clamp(2.75rem, 5vw, 4.5rem);
+  row-gap: 2rem;
+}
+.service-note { grid-column: span 4; }
+.service-note__name {
+  margin-bottom: 0.6rem;
+  font: 450 var(--f-mono) / 1.4 var(--mono);
+}
+.service-note p {
+  max-width: 38ch;
+  font-size: 0.98rem;
+  line-height: 1.55;
   color: var(--ink-2);
 }
 
@@ -617,9 +646,8 @@ main:focus { outline: none; }
 /* ===== Responsive ===== */
 @media (max-width: 900px) {
   .hero__lede,
-  .hero__cta,
+  .hero__cta { grid-column: 1 / span 8; }
   .project__body,
-  .service__desc,
   .about__body { grid-column: 3 / -1; }
 
   .gallery { margin-right: var(--gutter); border-right: 1px solid var(--rule); }
@@ -627,9 +655,10 @@ main:focus { outline: none; }
   .seal-detail { grid-column: 1 / span 4; grid-row: 1; }
   .claros__site { grid-column: 5 / -1; grid-row: 1; }
   .claros .project__body { grid-row: auto; }
-  .wwhra__site { grid-column: 1 / span 11; }
+  .wwhra__site { grid-column: 1 / span 6; }
+  .wwhra__text { grid-column: 7 / -1; }
 
-  .service__name { grid-column: 1 / -1; }
+  .service-note { grid-column: 1 / span 9; }
   .about__more { row-gap: 3rem; }
   .kit { grid-column: 1 / -1; grid-row: 2; }
 
@@ -645,11 +674,11 @@ main:focus { outline: none; }
 @media (max-width: 600px) {
   .site-nav__optional { display: none; }
 
-  .hero__build { padding-left: 0; font-size: 0.5em; margin-top: 0.3em; white-space: normal; }
+  .hero__design { font-size: 15.7cqi; }   /* small sizes draw slightly narrower */
+  .hero__foot { margin-top: 2.5rem; }
   .hero__lede,
   .hero__cta,
   .project__body,
-  .service__desc,
   .about__body { grid-column: 1 / -1; }
 
   .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; }
@@ -659,7 +688,9 @@ main:focus { outline: none; }
   .seal-hero .seal__mark { width: 78%; }
   .seal-detail { display: none; }
   .claros__site,
-  .wwhra__site { grid-column: 1 / -1; }
+  .wwhra__site,
+  .wwhra__text,
+  .service-note { grid-column: 1 / -1; }
 
 
   .form__row { grid-template-columns: 1fr; }
