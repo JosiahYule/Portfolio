@@ -17,6 +17,10 @@ The look is a quiet brutalism: one continuous sheet of paper ruled in ink, squar
 
 Two typefaces, each with a job. Newsreader is the design voice (headings, names, paragraphs). Martian Mono is the build voice (labels, links, addresses, buttons). The hero says this out loud: "I design websites," is set in Newsreader and "then I build them." in Martian Mono.
 
+The hero is a poster. "I design websites," is sized to run exactly edge to edge using container query units: `.hero > .wrap` is a size container, so `1cqi` is 1% of its width. The line is 6.565 times as wide as its font size, so `font-size: 15.2cqi` (100 / 6.565) fills it. **If you change the wording of that line, this number must change too.** Measure the new line's width at a font size of 100px in the browser, then use 100 / (width / 100). Phones use a slightly larger figure (15.7) because the typeface draws narrower letters at small sizes.
+
+The page varies its scale on purpose: two large features (staffing, Claros), one brief (Westwood Hills), and Services set as one large sentence with small notes underneath.
+
 Everything sits on one 12-column grid. Names and pictures sit on the left; every paragraph starts on column 7, so the text forms a single column down the page. The staffing gallery is the one element allowed off the grid: it runs to the right edge of the screen.
 
 Colour tokens live at the top of `portfolio.css`, with a dark set under `prefers-color-scheme: dark`. The header and hero sit on a dark brown (`#2E2018`), the same in both themes. That block redefines the page's colour tokens for itself, so links and rules inside it need no extra styles. Vermilion is kept for the contact band, where you act. Keep it there.
@@ -27,7 +31,7 @@ Projects live in the `#work` section of `docs/index.html`. Each is an `<article 
 
 - Every screenshot is an `<a class="shot">` linking to the live site, with a `shot__tag` in its corner naming the address.
 - `.gallery` is the three staffing sites: one large, two stacked, on a 1px ink grid.
-- `.claros` puts the seal (light and dark) beside the site screenshot. `.wwhra` is a single wide screenshot with the text tucked under its right side.
+- `.claros` puts the seal (light and dark) beside the site screenshot. `.wwhra` is a brief: a smaller screenshot with a smaller title (`project__title--brief`) and the text beside it.
 
 Screenshots should be WebP with an 800w and 1600w variant, matching the `srcset` shape used by the staffing entries.
 
