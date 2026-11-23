@@ -6,26 +6,24 @@ Personal portfolio for Josiah Yule, served from `docs/` via GitHub Pages at [www
 
 - `docs/index.html` holds the whole site: hero, work, services, about, contact
 - `docs/portfolio.css` / `docs/portfolio.js` hold the styles and behaviour. The page is fully readable with JavaScript off; the script only sets the footer year and handles form validation and sending.
-- `docs/fonts/` holds self-hosted variable fonts: Newsreader (headings and text) and Martian Mono (labels, specs, buttons). Both are trimmed to the weight range the site uses.
+- `docs/fonts/` holds self-hosted variable fonts: Hanken Grotesk (headings and text, Latin, weights 300 to 600) and Martian Mono (labels, specs, buttons).
 - `docs/work/<id>/index.html` are redirect stubs for the retired case-study URLs. Each one sends old links to its project on the home page (for example `/work/logodesign/` goes to `/#claros`).
 
 There is no build step. Everything is static and edited by hand.
 
 ## Design system
 
-The look is a quiet brutalism: one continuous sheet of paper ruled in ink, square corners, no shadows, no rounded pills, and links that fill in with ink on hover instead of fading.
+The look is a quiet brutalism: one continuous dark brown sheet ruled in cream, square corners, no shadows, no rounded pills, and links that fill in on hover instead of fading.
 
-Two typefaces, each with a job. Newsreader is the design voice (headings, names, paragraphs). Martian Mono is the build voice (labels, links, addresses, buttons). The hero says this out loud: "I design websites," is set in Newsreader and "then I build them." in Martian Mono.
+Two typefaces, each with a job. Hanken Grotesk is the design voice (headings, names, paragraphs). Martian Mono is the build voice (labels, links, addresses, buttons). The hero says this out loud: "I design websites," is set in Hanken Grotesk and "then I build them." in Martian Mono, both small in the top-left corner of the hero, with the intro at the bottom left and the brown between them left empty.
 
-The hero is a poster. "I design websites," is sized to run exactly edge to edge using container query units: `.hero > .wrap` is a size container, so `1cqi` is 1% of its width. The line is 6.565 times as wide as its font size, so `font-size: 15.2cqi` (100 / 6.565) fills it. **If you change the wording of that line, this number must change too.** Measure the new line's width at a font size of 100px in the browser, then use 100 / (width / 100). Check it in Safari as well as Chrome: Safari draws this line slightly wider at phone sizes.
-
-On phones the header and hero fill the whole screen, down behind Safari's floating toolbar. The hero uses `100lvh` (the full screen height) and adds `100lvh - 100svh` (the toolbar's height) to its bottom padding so the intro stays clear of the toolbar. The `html` element is brown and `body` is paper; iPhone Safari tints the strip behind the clock with the root background, so this keeps it brown.
+On phones the header and hero fill the whole screen, down behind Safari's floating toolbar. The hero uses `100lvh` (the full screen height) and adds `100lvh - 100svh` (the toolbar's height) to its bottom padding so the intro stays clear of the toolbar. The `html` element is the same brown as the page, because iPhone Safari tints the strip behind the clock with the root background.
 
 The page varies its scale on purpose: two large features (staffing, Claros), one brief (Westwood Hills), and Services set as one large sentence with small notes underneath.
 
 Everything sits on one 12-column grid. Names and pictures sit on the left; every paragraph starts on column 7, so the text forms a single column down the page. The staffing gallery is the one element allowed off the grid: it runs to the right edge of the screen.
 
-Colour tokens live at the top of `portfolio.css`, with a dark set under `prefers-color-scheme: dark`. The header and hero sit on a dark brown (`#2E2018`), the same in both themes. That block redefines the page's colour tokens for itself, so links and rules inside it need no extra styles. Vermilion is kept for the contact band, where you act. Keep it there.
+Colour tokens live at the top of `portfolio.css`. The whole page, from the header to the contact band, is one dark brown (`#2E2018`), the same in light and dark mode. Terracotta (`#E4572E`) is kept for the contact band and footer, where you act. Keep it there.
 
 ## Editing projects
 
