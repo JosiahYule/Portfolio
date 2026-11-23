@@ -31,6 +31,7 @@ Colour tokens live at the top of `portfolio.css`, with a dark set under `prefers
 
 Projects live in the `#work` section of `docs/index.html`. Each is an `<article class="project">` with a `project__title` (the client's name), its pictures, and a `project__body` paragraph on the text column.
 
+- Each project has a `<dl class="spec">` catalogue entry (Scope, Made with) that sits in the left columns level with the text. Add a `<div><dt>Year</dt><dd>2025</dd></div>` row to any of them to show a date.
 - Every screenshot is an `<a class="shot">` linking to the live site, with a `shot__tag` in its corner naming the address.
 - `.gallery` is the three staffing sites: one large, two stacked, on a 1px ink grid.
 - `.claros` puts the seal (light and dark) beside the site screenshot. `.wwhra` is a brief: a smaller screenshot with a smaller title (`project__title--brief`) and the text beside it.
