@@ -1,9 +1,48 @@
 /* =============================================================
-   Portfolio JS: footer year and the contact form.
+   Portfolio JS: footer year, the hero's typing verb, and the
+   contact form.
    Everything on the page is readable without this file.
    ============================================================= */
 
 document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ===== Hero: the build verb types itself =====
+   "then I build them." types through a few of the jobs, once, then
+   settles back on "build" and stops, so nothing keeps moving while
+   people read. Screen readers get the plain sentence from a hidden
+   copy of the word, and with reduced motion turned on nothing runs. */
+const verb = document.querySelector('.hero__verb');
+const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (verb && !calm) {
+  const words = ['launch', 'maintain', 'build'];   // starts on "build"
+  const wait = (ms) => new Promise((done) => setTimeout(done, ms));
+
+  const caret = document.createElement('span');
+  caret.className = 'hero__caret';
+  caret.setAttribute('aria-hidden', 'true');
+
+  (async () => {
+    await wait(1600);                  // let "build" be read first
+    verb.after(caret);
+    for (const word of words) {
+      caret.classList.add('is-busy');  // a real cursor stays solid while typing
+      while (verb.textContent) {       // backspace, a little faster than typing
+        verb.textContent = verb.textContent.slice(0, -1);
+        await wait(55);
+      }
+      await wait(250);
+      for (const letter of word) {     // type, with a slightly uneven hand
+        verb.textContent += letter;
+        await wait(80 + Math.random() * 60);
+      }
+      caret.classList.remove('is-busy');   // and blinks while it waits
+      if (word !== 'build') await wait(1300);
+    }
+    await wait(900);
+    caret.remove();
+  })();
+}
 
 /* ===== Contact form ===== */
 const form = document.getElementById('contactForm');
