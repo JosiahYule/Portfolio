@@ -3,7 +3,8 @@
    Two voices: Newsreader for the design side, Martian Mono for
    the build side. One sheet of paper, ruled in ink: square
    corners, no shadows, no rounded pills. Vermilion is kept for
-   the contact band, where you act.
+   the contact band, where you act. One thing is allowed off true:
+   the Claros stamp, because stamps never land straight.
    ============================================================ */
 
 /* ===== Fonts (self-hosted, variable, trimmed to the axes used) ===== */
@@ -71,6 +72,11 @@
   --f-body:  clamp(1.05rem, 1.1vw, 1.15rem);
   --f-mono:  0.75rem;
 
+  /* Paper grain. A tile of faint dark specks laid over every flat
+     colour, so the brown, the paper and the vermilion read as
+     printed stock rather than screen fills. */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .2 -.065'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+
   color-scheme: light;
 }
 
@@ -104,7 +110,7 @@ html {
 }
 
 body {
-  background: var(--paper);
+  background: var(--paper) var(--grain);
   color: var(--ink);
   font-family: var(--serif);
   font-size: var(--f-body);
@@ -214,7 +220,7 @@ main:focus { outline: none; }
   --ink-2:  #D3C5B4;   /*  9.3:1 */
   --muted:  #AE9C88;   /*  5.9:1 */
   --rule:   rgba(243, 234, 223, 0.2);
-  background: var(--paper);
+  background: var(--paper) var(--grain);
   color: var(--ink);
 }
 .site-header :focus-visible,
@@ -402,16 +408,44 @@ main:focus { outline: none; }
    mask, so the dark panel and the small light detail come from the
    same file. */
 .seal-hero {
+  position: relative;
   display: grid;
   place-items: center;
   aspect-ratio: 16 / 9;
   margin: 0 0 var(--gap);
   border: 1px solid var(--rule);
-  background: #141311;
+  background: #141311 var(--grain);
   color: #ECE8DF;
+}
+/* Crop marks, as on a printer's proof: short hairlines just outside
+   each corner, lined up with the panel's edges. The panel is the
+   print; the marks show where it is trimmed. */
+.seal-hero::before {
+  --o: 14px;   /* how far the marks sit outside the panel */
+  --l: 9px;    /* length of each mark */
+  content: '';
+  position: absolute;
+  inset: calc(var(--o) * -1 - 1px);
+  pointer-events: none;
+  --h: linear-gradient(var(--ink), var(--ink));
+  background:
+    var(--h) left 0 top var(--o) / var(--l) 1px,
+    var(--h) left var(--o) top 0 / 1px var(--l),
+    var(--h) right 0 top var(--o) / var(--l) 1px,
+    var(--h) right var(--o) top 0 / 1px var(--l),
+    var(--h) left 0 bottom var(--o) / var(--l) 1px,
+    var(--h) left var(--o) bottom 0 / 1px var(--l),
+    var(--h) right 0 bottom var(--o) / var(--l) 1px,
+    var(--h) right var(--o) bottom 0 / 1px var(--l);
+  background-repeat: no-repeat;
+  opacity: 0.55;
 }
 .seal-hero .seal__mark { width: 44%; }
 .claros { align-items: start; }
+/* The one-colour seal is shown the way a stamp-style seal ends up
+   in use: pressed onto the paper by hand, a few degrees off true,
+   with the ink catching unevenly. It is the only thing on the page
+   that is not square to the grid. */
 .seal-detail {
   grid-column: 1 / span 3;
   grid-row: 1 / span 2;
@@ -419,10 +453,15 @@ main:focus { outline: none; }
   place-items: center;
   aspect-ratio: 1;
   margin: 0;
-  padding: 12%;
-  border: 1px solid var(--rule);
-  background: #F4F1EA;
-  color: #141311;
+  padding: 6%;
+  color: var(--ink);
+  transform: translate(-3%, 4%) rotate(-7deg);
+}
+/* The stamp image is the seal with a few dry spots baked in
+   (claros-stamp-800.webp), so the ink looks unevenly pressed. */
+.seal-detail .seal__mark {
+  -webkit-mask-image: url('claros-stamp-800.webp');
+          mask-image: url('claros-stamp-800.webp');
 }
 .seal__mark {
   width: 100%;
@@ -510,7 +549,7 @@ main:focus { outline: none; }
 
 /* ===== Contact ===== */
 .contact {
-  background: var(--band);
+  background: var(--band) var(--grain);
   color: var(--band-ink);
   padding: clamp(4.5rem, 9vw, 8rem) 0 clamp(4rem, 8vw, 6rem);
 }
@@ -518,21 +557,6 @@ main:focus { outline: none; }
 .contact :focus-visible { outline-color: var(--band-ink); }
 .contact__grid { align-items: start; row-gap: 3rem; }
 .contact__intro { grid-column: 1 / span 5; }
-.contact__title {
-  font-size: clamp(2.8rem, 6.4vw, 6.2rem);
-  font-weight: 300;
-  line-height: 0.95;
-  letter-spacing: -0.045em;
-  max-width: 9ch;
-}
-.contact__desc {
-  margin-top: clamp(1.75rem, 3vw, 2.5rem);
-  max-width: 34ch;
-}
-.contact .link { font-size: 0.8em; }
-@media (hover: hover) {
-  .contact .link:hover { background: var(--band-ink); color: var(--band); }
-}
 
 .form,
 .form-done {
@@ -639,7 +663,7 @@ main:focus { outline: none; }
 
 /* ===== Footer ===== */
 .site-footer {
-  background: var(--band);
+  background: var(--band) var(--grain);
   color: var(--band-ink);
 }
 .site-footer__inner {
