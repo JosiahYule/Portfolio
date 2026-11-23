@@ -256,6 +256,22 @@ main:focus { outline: none; }
   font-stretch: 87.5%;
   letter-spacing: -0.01em;
 }
+/* The verb types itself through a few of the jobs (see
+   portfolio.js), then settles back on "build". The caret only
+   exists while it types. */
+.hero__caret {
+  display: inline-block;
+  width: 0.5em;
+  height: 1.05em;
+  margin-left: 0.05em;
+  vertical-align: -0.17em;
+  background: var(--band);
+  animation: caret-blink 1s steps(1) infinite;
+}
+.hero__caret.is-busy { animation: none; }
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
 .hero__foot { row-gap: 1.5rem; }
 .hero__lede {
   grid-column: 1 / span 5;
