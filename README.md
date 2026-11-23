@@ -15,7 +15,7 @@ There is no build step. Everything is static and edited by hand.
 
 The look is a quiet brutalism: one continuous dark brown sheet ruled in cream, square corners, no shadows, no rounded pills, and links that fill in on hover instead of fading.
 
-Two typefaces, each with a job. Hanken Grotesk is the design voice (headings, names, paragraphs). Martian Mono is the build voice (labels, links, addresses, buttons). The hero says this out loud: "I design websites," is set in Hanken Grotesk and "then I build them." in Martian Mono, both small in the top-left corner of the hero, with the intro at the bottom left and the brown between them left empty.
+Two typefaces, each with a job. Hanken Grotesk is the design voice (headings, names, paragraphs). Martian Mono is the build voice (labels, links, addresses, buttons). The hero line, "I design websites, then I build them.", sits small in the top-left corner in Hanken Grotesk, with the intro at the bottom left and the brown between them left empty. On load, "build" types itself through "launch" and "maintain" once, then settles back (see `portfolio.js`).
 
 On phones the header and hero fill the whole screen, down behind Safari's floating toolbar. The hero uses `100lvh` (the full screen height) and adds `100lvh - 100svh` (the toolbar's height) to its bottom padding so the intro stays clear of the toolbar. The `html` element is the same brown as the page, because iPhone Safari tints the strip behind the clock with the root background.
 
@@ -35,7 +35,7 @@ Projects live in the `#work` section of `docs/index.html`. Each is an `<article 
 
 Screenshots should be WebP with an 800w and 1600w variant, matching the `srcset` shape used by the staffing entries.
 
-The Claros seal (`claros-seal-1400.webp`) is a transparent image used as a CSS mask, so the large dark panel and the small light detail come from one file. The small one-colour seal is shown as a stamp, rotated a few degrees, using `claros-stamp-800.webp`: the same seal with dry ink spots baked into its transparency. `logo-cover.jpg` is the 3000px source it was cut from (it is a PNG despite the extension). The headshot files are no longer shown on the page; `headshot-800.webp` is still referenced by the structured data in `<head>`.
+The Claros seal (`claros-seal-1400.webp`) is a transparent image used as a CSS mask on the large dark panel. `logo-cover.jpg` is the 3000px source it was cut from (it is a PNG despite the extension). The headshot files are no longer shown on the page; `headshot-800.webp` is still referenced by the structured data in `<head>`.
 
 ## Local preview
 

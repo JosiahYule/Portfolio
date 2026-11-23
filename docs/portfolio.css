@@ -4,8 +4,7 @@
    for the build side. One dark brown sheet from the header to the
    contact band, ruled in cream: square corners, no shadows, no
    rounded pills. Terracotta is kept for the contact band and
-   footer, where you act. One thing is allowed off true: the
-   Claros stamp, because stamps never land straight.
+   footer, where you act.
    ============================================================ */
 
 /* ===== Fonts (self-hosted, variable, trimmed to the axes used) ===== */
@@ -249,22 +248,15 @@ main:focus { outline: none; }
 }
 /* The build half of the sentence, in the code typeface, sized so
    its lowercase letters match the height of the sans beside it */
-.hero__build {
-  font-family: var(--mono);
-  font-size: 0.86em;
-  font-weight: 400;
-  font-stretch: 87.5%;
-  letter-spacing: -0.01em;
-}
 /* The verb types itself through a few of the jobs (see
    portfolio.js), then settles back on "build". The caret only
    exists while it types. */
 .hero__caret {
   display: inline-block;
-  width: 0.5em;
-  height: 1.05em;
-  margin-left: 0.05em;
-  vertical-align: -0.17em;
+  width: max(2px, 0.09em);
+  height: 1.1em;
+  margin-left: 0.06em;
+  vertical-align: -0.2em;
   background: var(--band);
   animation: caret-blink 1s steps(1) infinite;
 }
@@ -407,27 +399,6 @@ main:focus { outline: none; }
 }
 .seal-hero .seal__mark { width: 44%; }
 .claros { align-items: start; }
-/* The one-colour seal is shown the way a stamp-style seal ends up
-   in use: pressed onto the paper by hand, a few degrees off true,
-   with the ink catching unevenly. It is the only thing on the page
-   that is not square to the grid. */
-.seal-detail {
-  grid-column: 1 / span 3;
-  grid-row: 1 / span 2;
-  display: grid;
-  place-items: center;
-  aspect-ratio: 1;
-  margin: 0;
-  padding: 6%;
-  color: var(--ink);
-  transform: translate(-3%, 4%) rotate(-7deg);
-}
-/* The stamp image is the seal with a few dry spots baked in
-   (claros-stamp-800.webp), so the ink looks unevenly pressed. */
-.seal-detail .seal__mark {
-  -webkit-mask-image: url('claros-stamp-800.webp');
-          mask-image: url('claros-stamp-800.webp');
-}
 .seal__mark {
   width: 100%;
   aspect-ratio: 1;
@@ -685,8 +656,7 @@ main:focus { outline: none; }
 
   .gallery { margin-right: var(--gutter); border-right: 1px solid var(--rule); }
 
-  .seal-detail { grid-column: 1 / span 4; grid-row: 1; }
-  .claros__site { grid-column: 5 / -1; grid-row: 1; }
+  .claros__site { grid-column: 3 / -1; }
   .claros .project__body { grid-row: auto; }
   .wwhra__site { grid-column: 1 / span 6; }
   .wwhra__text { grid-column: 7 / -1; }
@@ -717,7 +687,6 @@ main:focus { outline: none; }
 
   .seal-hero { aspect-ratio: 1; }
   .seal-hero .seal__mark { width: 78%; }
-  .seal-detail { display: none; }
   .claros__site,
   .wwhra__site,
   .wwhra__text,
